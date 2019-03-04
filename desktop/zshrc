@@ -1,0 +1,46 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt appendhistory autocd beep extendedglob nomatch notify
+
+# End of lines configured by zsh-newuser-install
+autoload -Uz compinit promptinit add-zsh-hook
+compinit
+promptinit
+add-zsh-hook chpwd chpwd_autols
+# The following lines were added by compinstall
+
+case $TERM in
+	linux)  LANG=C            ;;
+	*)      LANG=ja_JP.UTF-8  ;;
+esac
+export LANG
+
+case $TERM in
+  linux)  prompt walters  ;;
+  #screen) prompt walters  ;;
+  *)                      ;;
+esac
+
+chpwd_autols() {
+  ls
+}
+
+alias vim="nvim -u NONE -N"
+alias top="top -u wantjoy"
+
+export media="/home/wantjoy/media/"

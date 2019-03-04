@@ -1,0 +1,28 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+#case $TERM in 
+#  linux)  tmux  ;;
+#  screen) :     ;;
+#esac
+
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd chpwd_function1
+chpwd_function1 () {
+  ls
+}
+
+alias vim="nvim -u NONE -N"
+alias top="top -u wantjoy"
+source $(dirname $(gem which colorls))/tab_complete.sh
+export site="/home/wantjoy/hgrs/"
