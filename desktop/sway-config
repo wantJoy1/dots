@@ -10,7 +10,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-set $wallpaper "/home/wantjoy/media/wallpaper/anime/noel2.png"
+set $wallpaper "/home/wantjoy/media/wallpaper/wallpaper.png"
 
 bindsym Caps_Lock Control_L
 new_window pixel 3
@@ -201,7 +201,7 @@ bindsym $mod+m bar mode toggle
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in __DATADIR__/backgrounds/sway/)
-output * bg /home/wantjoy/media/wallpaper/gruvboxArch.png fill
+output * bg $wallpaper fill
 #
 # Example configuration:
 #
@@ -224,18 +224,32 @@ output * bg /home/wantjoy/media/wallpaper/gruvboxArch.png fill
 # Read `man 5 sway-input` for more information about this section.
 
 bar {
+    status_command    i3status
     position bottom
+    font pango:DejaVu Sans Mono 11px
+    mode              hide
+    workspace_buttons yes
 
-    status_command i3status
+    colors {
+      background #2d2c2c
+      statusline #ffffff
+      inactive_workspace #32323200 #32323200 #5c5c5c
+
+#          focused_workspace  #ffffff #285577
+#          active_workspace   #ffffff #333333
+#          inactive_workspace #888888 #222222
+#          urgent_workspace   #ffffff #900000
+    }
+
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     #status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
 
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
+#         colors {
+#         statusline #ffffff
+#         background #323232
+#         inactive_workspace #32323200 #32323200 #5c5c5c
+#    }
 }
 
 # startup applications
