@@ -10,9 +10,8 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-set $wallpaper "/home/wantjoy/media/wallpaper/wallpaper.png"
+set $wallpaper "/home/wantjoy/media/wallpaper/gruvboxArch.png"
 
-bindsym Caps_Lock Control_L
 new_window pixel 3
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -46,7 +45,8 @@ bindsym $mod+Shift+q kill
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # program launcher and window switcher
-bindsym $mod+p exec "rofi -modi combi -show combi -combi-modi drun -show-icons"
+#bindsym $mod+p exec "rofi -modi combi -show combi -combi-modi drun -show-icons"
+bindsym $mod+p exec "rofi -modi combi -show combi -combi-modi window,drun -show-icons"
 
 # screenshot
 bindsym Print exec "grim $HOME/screenshots/$(date +'%Y-%m-%d-%H:%M:%S'.png)"
@@ -57,7 +57,14 @@ bindsym XF86AudioRaiseVolume	exec --no-startup-id "amixer -q -D pulse sset Maste
 bindsym XF86AudioMute		exec --no-startup-id "amixer -D pulse set Master 1+ toggle"
 
 # Media keys
-bindsym XF86AudioPlay 		exec --no-startup-id "playerctl play-pause"
+bindsym Pause 		exec --no-startup-id "playerctl play-pause"
+
+## caps to control
+#input <identifier> {
+#  xkb_layout us,jp
+#  xkb_options ctrl:nocaps
+##xkb_options caps:escape
+#}
 
 # change focus
 bindsym $mod+h focus left
@@ -109,6 +116,9 @@ bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+d focus child
 
+# focus the urgent window
+bindsym $mod+x [urgent=latest] focus
+
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
@@ -148,6 +158,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # i3lock
 bindsym $mod+Shift+x exec i3lock -n --image $wallpaper
+bindsym Scroll_Lock exec i3lock -n --image $wallpaper
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -227,7 +238,7 @@ bar {
     status_command    i3status
     position bottom
     font pango:DejaVu Sans Mono 11px
-    mode              hide
+    #mode              hide
     workspace_buttons yes
 
     colors {

@@ -13,8 +13,8 @@ set $mod Mod4
 
 new_window pixel 3
 
-gaps inner 15
-gaps outer 15
+gaps inner 0
+gaps outer 0
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -35,13 +35,10 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec sakura
 
 # kill focused window
 bindsym $mod+Shift+q kill
-
-# set wallpaper
-
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
@@ -62,7 +59,7 @@ bindsym XF86AudioRaiseVolume	exec --no-startup-id "amixer -q -D pulse sset Maste
 bindsym XF86AudioMute		exec --no-startup-id "amixer -D pulse set Master 1+ toggle"
 
 # Media keys
-bindsym XF86AudioPlay 		exec --no-startup-id "playerctl play-pause"
+bindsym Pause 		exec --no-startup-id "playerctl play-pause"
 
 # browser
 #bindsym Control+Alt+i exec --no-startup-id "firefox"
@@ -120,6 +117,9 @@ bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+d focus child
 
+# focus the urgent window
+bindsym $mod+x [urgent=latest] focus
+
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
@@ -158,7 +158,8 @@ bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
 # i3lock
-bindsym $mod+Shift+x exec "i3lock -n -i /home/wantjoy/media/wallpaper/wallpaper.png"
+bindsym $mod+Shift+x exec "systemctl suspend; i3lock -n -i /home/wantjoy/media/wallpaper/gruvboxArch.png"
+bindsym Scroll_Lock exec "i3lock -n --image /home/wantjoy/media/wallpaper/gruvboxArch.png"
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -201,7 +202,7 @@ bindsym $mod+m bar mode toggle
 bar {
         status_command    i3status
         font pango:DejaVu Sans Mono 11px
-        mode              hide
+#        mode              hide
         workspace_buttons yes
 
         colors {
@@ -218,4 +219,4 @@ bar {
 # startup applications
 exec fcitx-autostart
 exec nm-applet
-exec --no-startup-id "feh --bg-scale media/wallpaper/wallpaper.png"
+exec --no-startup-id "feh --bg-scale /home/wantjoy/media/wallpaper/gruvboxArch.png"
